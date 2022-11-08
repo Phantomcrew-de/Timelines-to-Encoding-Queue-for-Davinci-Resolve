@@ -1,6 +1,6 @@
 # Timelines to Encoding Queue for Davinci Resolve
-Add all timelines of your project file to the encoding queue.
-Custom seach in timelinenames to choose which timelines to be encode.
+This script automaticly adds your timelines of your projects to the encoding queue. 
+Seach in timelinenames for choosing which timelines you want to encode.
 
 The main script (search_in_timelines_and_encode.py) runs only in the davinci resolve studio version.
 ## Installation
@@ -9,4 +9,8 @@ You need to install python 2.7.18 on your system. Alternatively, install anacond
 
 ## Run
 ### For Linux (Ubuntu/Zorin):
-Run the script in terminal with python ./search_in_timelines_and_encode.py
+1. Run davinci resolve and open your project. 
+2. Go to the delyvery page and change the encoding settings to the your custom output format
+3. After changing **Video** and **Audio** settings you go to **File** and change **Filename use** to **Timeline name**
+4. Open your terminal and run the script with: **python ./search_in_timelines_and_encode.py**
+5. You can run the script several times with multiple project files. You need to activate **Show all projects** at the three ... in the right top corner of your **Encoding Queue**
