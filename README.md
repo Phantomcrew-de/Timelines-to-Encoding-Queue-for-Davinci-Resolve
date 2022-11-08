@@ -1,6 +1,6 @@
 # Timelines to Encoding Queue for Davinci Resolve
 This script automaticly adds your timelines of your projects to the encoding queue. 
-Seach in timelinenames for choosing which timelines you want to encode.
+Seach in timelinenames for choosing which timelines you need to encode.
 
 The main script (search_in_timelines_and_encode.py) runs only in the davinci resolve studio version.
 ## Installation
