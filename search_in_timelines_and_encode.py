@@ -15,9 +15,9 @@ resolve = dvr.scriptapp("Resolve")
 
 
 project_manager = resolve.GetProjectManager()
-print("\033[0;37;40m \n**********************************************************************")
+print("\033[0;37;40m \n************************************************************************")
 print("* Advanced Encoding Queue for DaVinci Resolve Studio by Phantomcrew.de *")
-print("**********************************************************************\n\n")
+print("************************************************************************\n\n")
 print("Choose a Project(copy & paste):\n\033[1;37;40m")
 print ("\n".join(project_manager.GetProjectListInCurrentFolder()))
 ProjectName = raw_input("\033[0;37;40m\nEnter projectname or press Enter: ")
