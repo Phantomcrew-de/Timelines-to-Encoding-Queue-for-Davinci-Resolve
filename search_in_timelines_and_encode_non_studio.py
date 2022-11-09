@@ -4,6 +4,7 @@
 
 searchintimelinenamesfor = "_v05"
 
+import time
 project_manager = resolve.GetProjectManager()
 project = project_manager.GetCurrentProject()
 print (project.GetName())
@@ -27,7 +28,7 @@ while i <= n:
 		    "FormatHeight": 1080,
         })
         pid = project.AddRenderJob()
-        print ("Add: Timeline " + str(i) + " of " + str(n) + " -> " + timeline.GetName())
+        print ("Add:  Timeline " + str(i) + " of " + str(n) + " -> " + timeline.GetName())
         time.sleep(0.2)
         i = i + 1
     else:
