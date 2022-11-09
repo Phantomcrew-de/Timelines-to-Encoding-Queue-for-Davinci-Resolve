@@ -19,3 +19,7 @@ You need to install python 2.7.18 on your system. Alternatively, install anacond
 2. Modify the string of the variable *searchintimelinenamesfor = "_v05"* to a string you want to search for.
 3. Copy the text and past it inside **Davinci Resolve > Workspace > Console > Python 3**
 4. Press enter
+Example:
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=iSUb798p8DM
+" target="_blank"><img src="http://img.youtube.com/vi/iSUb798p8DM/0.jpg" 
+alt="YouTube Video with Script Demo" width="240" height="180" border="10" /></a>
