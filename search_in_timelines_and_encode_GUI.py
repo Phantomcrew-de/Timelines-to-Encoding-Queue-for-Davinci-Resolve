@@ -13,7 +13,7 @@ resolve = DaVinciResolveScript.scriptapp("Resolve")
 project_manager = resolve.GetProjectManager()
 
 def run_rendering(settings, selected_timelines):
-    project = project_manager.GetProjectByName(settings["project_name"])
+    project = settings["project"]
     if not project:
         print("Projekt nicht gefunden.")
         return
@@ -63,6 +63,8 @@ class RenderGUI:
     def __init__(self, master):
         self.master = master
         master.title("Render-Einstellungen")
+
+        self.current_project = None
 
         # Projekt-Auswahl
         tk.Label(master, text="Projekt:").grid(row=0, column=0, sticky='e')
@@ -145,7 +147,9 @@ class RenderGUI:
 
     def on_project_change(self):
         project_name = self.project_var.get()
-        project = project_manager.LoadProject(project_name)
+        project_manager.LoadProject(project_name)
+        self.current_project = project_manager.GetCurrentProject()
+        project = self.current_project
         if not project:
             return
 
@@ -197,7 +201,7 @@ class RenderGUI:
             "use_in_out": self.use_in_out.get(),
             "start_render": True,
             "bitrate": int(bitrate_mbit * 1000000),
-            "project_name": self.project_var.get()
+            "project": self.current_project
         }
 
         for key in ["output_dir", "width", "height", "framerate"]:
