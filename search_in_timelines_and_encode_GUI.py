@@ -135,10 +135,26 @@ class RenderGUI:
         self.search_pattern.grid(row=7, column=1)
         tk.Button(master, text="Timelines nach Muster auswählen", command=self.select_timelines_by_pattern).grid(row=7, column=2)
 
-        # Timeline-Auswahl-Frame
+        # Scrollbarer Timeline-Auswahl-Frame
         self.timeline_vars = {}
+
         self.timeline_frame = tk.LabelFrame(master, text="Timelines auswählen")
-        self.timeline_frame.grid(row=8, column=0, columnspan=4, pady=10, sticky='we')
+        self.timeline_frame.grid(row=8, column=0, columnspan=4, pady=10, sticky='nsew')
+
+        self.timeline_canvas = tk.Canvas(self.timeline_frame, height=150)
+        self.timeline_canvas.pack(side="left", fill="both", expand=True)
+
+        self.scrollbar = tk.Scrollbar(self.timeline_frame, orient="vertical", command=self.timeline_canvas.yview)
+        self.scrollbar.pack(side="right", fill="y")
+
+        self.inner_timeline_frame = tk.Frame(self.timeline_canvas)
+        self.inner_timeline_frame.bind(
+            "<Configure>",
+            lambda e: self.timeline_canvas.configure(scrollregion=self.timeline_canvas.bbox("all"))
+        )
+
+        self.timeline_canvas.create_window((0, 0), window=self.inner_timeline_frame, anchor="nw")
+        self.timeline_canvas.configure(yscrollcommand=self.scrollbar.set)
 
         # Start-Button
         tk.Button(master, text="Rendern starten", command=self.on_start).grid(row=9, column=1, pady=10)
@@ -183,7 +199,7 @@ class RenderGUI:
 
         self.update_formats()
 
-        for widget in self.timeline_frame.winfo_children():
+        for widget in self.inner_timeline_frame.winfo_children():
             widget.destroy()
 
         self.timeline_vars = {}
@@ -197,7 +213,7 @@ class RenderGUI:
                 var = tk.IntVar()
                 self.timeline_vars[i] = var
                 self.current_timelines[i] = name
-                cb = tk.Checkbutton(self.timeline_frame, text=name, variable=var)
+                cb = tk.Checkbutton(self.inner_timeline_frame, text=name, variable=var)
                 cb.pack(anchor='w')
 
     def update_formats(self):
@@ -211,8 +227,6 @@ class RenderGUI:
         if formats:
             self.format_var.set(next(iter(formats.keys())))
 
-
-
     def update_codecs_for_format(self):
         if not self.current_project:
             return
@@ -224,8 +238,6 @@ class RenderGUI:
             menu.add_command(label=desc, command=tk._setit(self.codec_var, codec))
         if codecs:
             self.codec_var.set(next(iter(codecs.values())))
-
-
 
     def select_timelines_by_pattern(self):
         pattern = self.search_pattern.get().lower()
