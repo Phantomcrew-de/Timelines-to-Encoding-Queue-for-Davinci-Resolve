@@ -37,6 +37,7 @@ def run_rendering(settings, selected_timelines):
             "FormatWidth": int(settings["width"]),
             "FormatHeight": int(settings["height"]),
             "FrameRate": float(settings["framerate"]),
+            "VideoBitRate": settings.get("bitrate", 20000000)  # Default: 20 Mbit
         }
 
         if settings["format"]:
@@ -100,17 +101,29 @@ class RenderGUI:
         self.format_var.set("mp4")
         self.format_menu.grid(row=5, column=1, sticky='w')
 
+        # Bitrate
+        tk.Label(master, text="Bitrate (Mbit/s):").grid(row=6, column=0, sticky='e')
+        self.bitrate = tk.Entry(master)
+        self.bitrate.grid(row=6, column=1)
+        self.bitrate.insert(0, "20")
+
         # In/Out Marker
         self.use_in_out = tk.IntVar()
-        tk.Checkbutton(master, text="Timeline In/Out Marker verwenden", variable=self.use_in_out).grid(row=6, column=1, sticky='w')
+        tk.Checkbutton(master, text="Timeline In/Out Marker verwenden", variable=self.use_in_out).grid(row=6, column=2, sticky='w')
+
+        # Timeline Suchmuster
+        tk.Label(master, text="Timeline-Suchmuster:").grid(row=7, column=0, sticky='e')
+        self.search_pattern = tk.Entry(master)
+        self.search_pattern.grid(row=7, column=1)
+        tk.Button(master, text="Timelines nach Muster auswählen", command=self.select_timelines_by_pattern).grid(row=7, column=2)
 
         # Timeline-Auswahl-Frame
         self.timeline_vars = {}
         self.timeline_frame = tk.LabelFrame(master, text="Timelines auswählen")
-        self.timeline_frame.grid(row=7, column=0, columnspan=3, pady=10, sticky='we')
+        self.timeline_frame.grid(row=8, column=0, columnspan=3, pady=10, sticky='we')
 
         # Start-Button
-        tk.Button(master, text="Rendern starten", command=self.on_start).grid(row=8, column=1, pady=10)
+        tk.Button(master, text="Rendern starten", command=self.on_start).grid(row=9, column=1, pady=10)
 
         self.load_projects()
 
@@ -140,20 +153,39 @@ class RenderGUI:
             widget.destroy()
 
         self.timeline_vars = {}
+        self.current_timelines = {}
+
         timeline_count = project.GetTimelineCount()
 
         for i in range(1, timeline_count + 1):
             timeline = project.GetTimelineByIndex(i)
             if timeline:
+                name = timeline.GetName()
                 var = tk.IntVar()
                 self.timeline_vars[i] = var
-                cb = tk.Checkbutton(self.timeline_frame, text=timeline.GetName(), variable=var)
+                self.current_timelines[i] = name
+                cb = tk.Checkbutton(self.timeline_frame, text=name, variable=var)
                 cb.pack(anchor='w')
+
+    def select_timelines_by_pattern(self):
+        pattern = self.search_pattern.get().lower()
+        if not pattern:
+            tkMessageBox.showwarning("Hinweis", "Bitte ein Suchmuster eingeben.")
+            return
+        for i, name in self.current_timelines.items():
+            if pattern in name.lower():
+                self.timeline_vars[i].set(1)
 
     def on_start(self):
         selected_timelines = [i for i, var in self.timeline_vars.items() if var.get() == 1]
         if not selected_timelines:
             tkMessageBox.showwarning("Warnung", "Bitte mindestens eine Timeline auswählen.")
+            return
+
+        try:
+            bitrate_mbit = float(self.bitrate.get())
+        except ValueError:
+            tkMessageBox.showerror("Fehler", "Bitte eine gültige Bitrate eingeben.")
             return
 
         settings = {
@@ -164,6 +196,7 @@ class RenderGUI:
             "format": self.format_var.get(),
             "use_in_out": self.use_in_out.get(),
             "start_render": True,
+            "bitrate": int(bitrate_mbit * 1000000),
             "project_name": self.project_var.get()
         }
 
