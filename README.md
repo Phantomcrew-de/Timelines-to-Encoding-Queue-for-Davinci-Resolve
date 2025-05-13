@@ -1,3 +1,9 @@
+
+
+
+
+
+
 <!DOCTYPE html>
 <html
   lang="en"
@@ -1969,75 +1975,3 @@ Search in names of timelines for choosing which timelines you need to encode.</p
   </body>
 </html>
 
-### 🐍 Python Setup
-
-This script requires Python. Depending on your DaVinci Resolve version:
-
-- **DaVinci Resolve Studio** supports **Python 2**.
-- **DaVinci Resolve (Free)** supports **Python 3**.
-
-You only need one of them installed on your system. If you're unsure, install **Python 3**.
-
-#### 📅 Install Python
-
-**macOS**
-
-- Python 2 (for Studio):
-  ```bash
-  brew install python@2
-  ```
-  > Note: You may need to use a third-party tap or download an older installer, as Python 2 is deprecated.
-
-- Python 3 (for Free version):
-  ```bash
-  brew install python3
-  ```
-
-**Windows**
-
-- Download the appropriate version:
-  - Python 2: [https://www.python.org/downloads/release/python-2718/](https://www.python.org/downloads/release/python-2718/)
-  - Python 3: [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)
-
-  > Make sure to check the box **"Add Python to PATH"** during installation.
-
-**Linux (Ubuntu/Debian)**
-
-- Python 2:
-  ```bash
-  sudo apt update
-  sudo apt install python2
-  ```
-
-- Python 3:
-  ```bash
-  sudo apt update
-  sudo apt install python3
-  ```
-
-#### 🏠 Install Tkinter GUI (required for this script)
-
-**macOS**
-
-- Python 3:
-  ```bash
-  brew install python-tk
-  ```
-
-**Windows**
-
-- Tkinter is typically included by default. If you experience issues:
-  - For Python 2: Reinstall from [python.org](https://www.python.org/downloads/release/python-2718/)
-  - For Python 3: Use the official installer from [python.org](https://www.python.org/downloads/windows/), ensuring the **tcl/tk and IDLE** feature is selected.
-
-**Linux (Ubuntu/Debian)**
-
-- Python 2:
-  ```bash
-  sudo apt install python-tk
-  ```
-
-- Python 3:
-  ```bash
-  sudo apt install python3-tk
-  ```
