@@ -1,11 +1,9 @@
 #!/usr/bin/env python
+#Julius Video 2023
 #Runs inside Davinci Resolve -> Workspace -> Console -> Python 3
 #Modify the variable in nextline ("v05") to a string you want to search for. Then Copy and paste all text to console.
 
 searchintimelinenamesfor = "_v05"
-renderFormat = "mp4"
-renderCodec = "H264"
-targetDir = "/Users/Luis/Desktop/videoResults"
 
 import time
 project_manager = resolve.GetProjectManager()
@@ -25,12 +23,10 @@ while i <= n:
     timeline = project.GetCurrentTimeline()
     if timeline.GetName() != None and searchintimelinenamesfor in timeline.GetName():
         time.sleep(0.1)
-	project.SetCurrentRenderFormatAndCodec(renderFormat, renderCodec)
         project.SetRenderSettings({
 		    "SelectAllFrames": True,
 		    "FormatWidth": 1920,
 		    "FormatHeight": 1080,
-		    "TargetDir" : targetDir
         })
         pid = project.AddRenderJob()
         print ("Add:  Timeline " + str(i) + " of " + str(n) + " -> " + timeline.GetName())
