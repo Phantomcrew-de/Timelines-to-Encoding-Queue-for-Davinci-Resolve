@@ -6,25 +6,33 @@ import tkMessageBox
 import time
 import sys
 import imp
+import json
+import os
+from datetime import datetime
 
 # Resolve API laden
 DaVinciResolveScript = imp.load_source('DaVinciResolveScript', "/opt/resolve/Developer/Scripting/Modules/DaVinciResolveScript.py")
 resolve = DaVinciResolveScript.scriptapp("Resolve")
 project_manager = resolve.GetProjectManager()
 
-def run_rendering(settings, selected_timelines):
+PRESET_FILE = "last_preset.json"
+
+def run_rendering(settings, selected_timelines, log_callback):
     project = settings["project"]
     if not project:
-        print("Projekt nicht gefunden.")
+        log_callback("❌ Projekt nicht gefunden.\n")
         return
 
-    print("Lade Projekt:", project.GetName())
+    log_callback("📁 Lade Projekt: %s\n" % project.GetName())
 
     if len(project.GetRenderJobList()) > 0:
-        print("Bestehende Renderjobs werden gelöscht.")
+        log_callback("🧹 Bestehende Renderjobs werden gelöscht.\n")
         project.DeleteAllRenderJobs()
 
-    print("Füge neue Jobs hinzu ...")
+    log_callback("🎞 Format: %s, Codec: %s\n" % (settings["format"], settings["codec"]))
+    project.SetCurrentRenderFormatAndCodec(settings["format"], settings["codec"])
+
+    log_callback("➕ Neue Renderjobs werden hinzugefügt:\n")
     for i in selected_timelines:
         timeline = project.GetTimelineByIndex(i)
         if not timeline:
@@ -37,27 +45,33 @@ def run_rendering(settings, selected_timelines):
             "FormatWidth": int(settings["width"]),
             "FormatHeight": int(settings["height"]),
             "FrameRate": float(settings["framerate"]),
-            "VideoBitRate": settings.get("bitrate", 20000000)  # Default: 20 Mbit
+            "VideoBitRate": settings.get("bitrate", 20000000)
         }
-
-        if settings["format"]:
-            render_settings["Format"] = settings["format"]
 
         project.SetRenderSettings(render_settings)
         project.AddRenderJob()
-        print(" → Timeline hinzugefügt:", timeline.GetName())
+        log_callback(" → %s\n" % timeline.GetName())
 
     if settings.get("start_render", False):
-        print("Starte Rendering ...")
+        log_callback("🚀 Rendering wird gestartet...\n")
+        start_time = time.time()
         project.StartRendering(isInteractiveMode=True)
-        timer = 0
+
         animation = "|/-\\"
+        anim_index = 0
+
         while project.IsRenderingInProgress():
             time.sleep(1)
-            timer += 1
-            sys.stdout.write("Rendering seit %d Sekunden %s\r" % (timer, animation[timer % 4]))
+            sys.stdout.write("Rendering... %s\r" % animation[anim_index % 4])
             sys.stdout.flush()
-        print("\nRendering abgeschlossen in %d Sekunden." % timer)
+            anim_index += 1
+
+        end_time = time.time()
+        elapsed = int(end_time - start_time)
+        log_callback("✅ Rendering abgeschlossen.\n")
+        log_callback("🕒 Dauer: %d Sekunden\n" % elapsed)
+        log_callback("⏱ Start: %s\n" % datetime.fromtimestamp(start_time).strftime("%H:%M:%S"))
+        log_callback("⏱ Ende: %s\n" % datetime.fromtimestamp(end_time).strftime("%H:%M:%S"))
 
 class RenderGUI:
     def __init__(self, master):
@@ -83,37 +97,39 @@ class RenderGUI:
         tk.Label(master, text="Breite:").grid(row=2, column=0, sticky='e')
         self.width = tk.Entry(master)
         self.width.grid(row=2, column=1)
-        self.width.insert(0, "1920")
 
         tk.Label(master, text="Höhe:").grid(row=3, column=0, sticky='e')
         self.height = tk.Entry(master)
         self.height.grid(row=3, column=1)
-        self.height.insert(0, "1080")
 
         # Framerate
         tk.Label(master, text="Framerate:").grid(row=4, column=0, sticky='e')
         self.framerate = tk.Entry(master)
         self.framerate.grid(row=4, column=1)
-        self.framerate.insert(0, "25")
 
         # Format
         tk.Label(master, text="Format:").grid(row=5, column=0, sticky='e')
         self.format_var = tk.StringVar()
-        self.format_menu = tk.OptionMenu(master, self.format_var, "mp4", "mov", "avi", "mxf")
-        self.format_var.set("mp4")
+        self.format_menu = tk.OptionMenu(master, self.format_var, "")
         self.format_menu.grid(row=5, column=1, sticky='w')
+        self.format_var.trace("w", lambda *args: self.update_codecs_for_format())
+
+        # Codec
+        tk.Label(master, text="Codec:").grid(row=5, column=2, sticky='e')
+        self.codec_var = tk.StringVar()
+        self.codec_menu = tk.OptionMenu(master, self.codec_var, "")
+        self.codec_menu.grid(row=5, column=3, sticky='w')
 
         # Bitrate
         tk.Label(master, text="Bitrate (Mbit/s):").grid(row=6, column=0, sticky='e')
         self.bitrate = tk.Entry(master)
         self.bitrate.grid(row=6, column=1)
-        self.bitrate.insert(0, "20")
 
         # In/Out Marker
         self.use_in_out = tk.IntVar()
         tk.Checkbutton(master, text="Timeline In/Out Marker verwenden", variable=self.use_in_out).grid(row=6, column=2, sticky='w')
 
-        # Timeline Suchmuster
+        # Timeline-Suchmuster
         tk.Label(master, text="Timeline-Suchmuster:").grid(row=7, column=0, sticky='e')
         self.search_pattern = tk.Entry(master)
         self.search_pattern.grid(row=7, column=1)
@@ -122,12 +138,24 @@ class RenderGUI:
         # Timeline-Auswahl-Frame
         self.timeline_vars = {}
         self.timeline_frame = tk.LabelFrame(master, text="Timelines auswählen")
-        self.timeline_frame.grid(row=8, column=0, columnspan=3, pady=10, sticky='we')
+        self.timeline_frame.grid(row=8, column=0, columnspan=4, pady=10, sticky='we')
 
         # Start-Button
         tk.Button(master, text="Rendern starten", command=self.on_start).grid(row=9, column=1, pady=10)
 
+        # Log-Ausgabe
+        self.log_output = tk.Text(master, height=10, width=80)
+        self.log_output.grid(row=10, column=0, columnspan=4)
+        self.log_output.config(state="disabled")
+
         self.load_projects()
+        self.load_last_preset()
+
+    def log(self, message):
+        self.log_output.config(state="normal")
+        self.log_output.insert(tk.END, message)
+        self.log_output.see(tk.END)
+        self.log_output.config(state="disabled")
 
     def browse_dir(self):
         directory = tkFileDialog.askdirectory()
@@ -153,6 +181,8 @@ class RenderGUI:
         if not project:
             return
 
+        self.update_formats()
+
         for widget in self.timeline_frame.winfo_children():
             widget.destroy()
 
@@ -160,7 +190,6 @@ class RenderGUI:
         self.current_timelines = {}
 
         timeline_count = project.GetTimelineCount()
-
         for i in range(1, timeline_count + 1):
             timeline = project.GetTimelineByIndex(i)
             if timeline:
@@ -170,6 +199,33 @@ class RenderGUI:
                 self.current_timelines[i] = name
                 cb = tk.Checkbutton(self.timeline_frame, text=name, variable=var)
                 cb.pack(anchor='w')
+
+    def update_formats(self):
+        if not self.current_project:
+            return
+        formats = self.current_project.GetRenderFormats()
+        menu = self.format_menu["menu"]
+        menu.delete(0, "end")
+        for fmt in formats.keys():
+            menu.add_command(label=fmt, command=tk._setit(self.format_var, fmt))
+        if formats:
+            self.format_var.set(next(iter(formats.keys())))
+
+
+
+    def update_codecs_for_format(self):
+        if not self.current_project:
+            return
+        fmt = self.format_var.get()
+        codecs = self.current_project.GetRenderCodecs(fmt)
+        menu = self.codec_menu["menu"]
+        menu.delete(0, "end")
+        for desc, codec in codecs.items():
+            menu.add_command(label=desc, command=tk._setit(self.codec_var, codec))
+        if codecs:
+            self.codec_var.set(next(iter(codecs.values())))
+
+
 
     def select_timelines_by_pattern(self):
         pattern = self.search_pattern.get().lower()
@@ -198,19 +254,54 @@ class RenderGUI:
             "height": self.height.get(),
             "framerate": self.framerate.get(),
             "format": self.format_var.get(),
+            "codec": self.codec_var.get(),
             "use_in_out": self.use_in_out.get(),
             "start_render": True,
             "bitrate": int(bitrate_mbit * 1000000),
             "project": self.current_project
         }
 
-        for key in ["output_dir", "width", "height", "framerate"]:
+        for key in ["output_dir", "width", "height", "framerate", "format", "codec"]:
             if not settings[key]:
                 tkMessageBox.showerror("Fehler", "Bitte gib %s ein." % key)
                 return
 
-        run_rendering(settings, selected_timelines)
-        tkMessageBox.showinfo("Info", "Rendering abgeschlossen oder gestartet.")
+        self.save_last_preset(settings)
+        run_rendering(settings, selected_timelines, self.log)
+
+    def save_last_preset(self, settings):
+        try:
+            preset = {
+                "output_dir": settings["output_dir"],
+                "width": settings["width"],
+                "height": settings["height"],
+                "framerate": settings["framerate"],
+                "format": settings["format"],
+                "codec": settings["codec"],
+                "bitrate": settings["bitrate"] // 1000000,
+                "use_in_out": settings["use_in_out"]
+            }
+            with open(PRESET_FILE, "w") as f:
+                json.dump(preset, f)
+        except Exception as e:
+            self.log("⚠ Fehler beim Speichern des Presets: %s\n" % str(e))
+
+    def load_last_preset(self):
+        if not os.path.exists(PRESET_FILE):
+            return
+        try:
+            with open(PRESET_FILE, "r") as f:
+                preset = json.load(f)
+                self.output_dir.insert(0, preset.get("output_dir", ""))
+                self.width.insert(0, preset.get("width", "1920"))
+                self.height.insert(0, preset.get("height", "1080"))
+                self.framerate.insert(0, preset.get("framerate", "25"))
+                self.bitrate.insert(0, preset.get("bitrate", "20"))
+                self.format_var.set(preset.get("format", "mp4"))
+                self.codec_var.set(preset.get("codec", ""))
+                self.use_in_out.set(preset.get("use_in_out", 0))
+        except Exception as e:
+            self.log("⚠ Fehler beim Laden des Presets: %s\n" % str(e))
 
 if __name__ == "__main__":
     root = tk.Tk()
