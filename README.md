@@ -13,7 +13,7 @@ You need to install python 2.7.18 on your system. Alternatively, install anacond
 1. Run davinci resolve and open your project. 
 2. Go to the **Deliver** page and change the encoding settings to your custom output format
 3. After changing **Video** and **Audio** settings you go to **File** and change **Filename use** to **Timeline name**
-4. Open your terminal and run the script with: ```python ./search_in_timelines_and_encode.py``` or ```./run_search_and_encode.sh```
+4. Open your terminal and run the script with: ```python2 ./search_in_timelines_and_encode.py``` or ```./run_search_and_encode.sh```
 6. You can run the script several times with multiple project files. You need to activate **Show all projects** at the three dots in the top right corner of your **Encoding Queue**
 ### For Linux (Ubuntu/Zorin, Davinci Resolve non-Studio):
 1. Open *search_in_timelines_and_encode_non_studio.py* file with editor. 
