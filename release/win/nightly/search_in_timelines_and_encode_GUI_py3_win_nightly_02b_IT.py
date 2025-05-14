@@ -309,7 +309,7 @@ class RenderGUI:
         elapsed = end_time - start_time
         minutes, seconds = divmod(int(elapsed), 60)
         self.log(f"✅ Rendering completato alle {end_dt.strftime('%H:%M:%S')}.\n")
-        self.log(f"⏱ Durata: {minutes} Minuten {seconds} Sekunden\n")
+        self.log(f"⏱ Durata: {minutes} minuti {seconds} secondi\n")
 
 
     def save_last_preset(self, settings):
@@ -319,7 +319,7 @@ class RenderGUI:
             with open(PRESET_FILE, "w") as f:
                 json.dump(preset, f)
         except Exception as e:
-            self.log(f"⚠ Errore beim Speichern: {e}\n")
+            self.log(f"⚠ salvataggio degli errori: {e}\n")
 
     def load_last_preset(self):
         if not os.path.exists(PRESET_FILE):
