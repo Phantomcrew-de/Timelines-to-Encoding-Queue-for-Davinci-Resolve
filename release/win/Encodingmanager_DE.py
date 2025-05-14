@@ -105,6 +105,8 @@ class RenderGUI:
 
         tk.Label(master, text="Render-Preset:").grid(row=0, column=0, sticky='e')
         self.preset_var = tk.StringVar()
+        if self.render_presets:
+            self.preset_var.set(self.render_presets[0])
         self.preset_menu = tk.OptionMenu(master, self.preset_var, *self.render_presets)
         self.preset_menu.grid(row=0, column=1, columnspan=2, sticky='w')
 
