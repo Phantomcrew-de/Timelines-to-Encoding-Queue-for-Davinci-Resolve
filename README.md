@@ -13,10 +13,10 @@ You can filter timelines by name and either use presets or define custom encoder
 
 - Filter timelines by name (e.g., `_v01`, `Final`, `cut1`)
 - Add multiple timelines to the render queue with one click
-- GUI for selecting projects, render presets, and output settings
+- GUI for selecting projects, timelines, render presets, and output settings
 - Custom resolution, bitrate, codec & format possible
-- Logging and status per timeline
-- Saves previous settings (presets)
+- Logging status
+- Saves previous settings
 
 ---
 
@@ -24,9 +24,10 @@ You can filter timelines by name and either use presets or define custom encoder
 
 - `release/`
   - `linux/` → Python 2 scripts for Linux (GUI & shell start scripts)
+  - `win/` → Python 3 scripts for Windows (stable versions with GUI)
   - `win/nightly/` → Python 3 scripts for Windows (nightly versions with GUI)
 - `Screenshots/` → GUI screenshots for documentation
-- `alternativ/` → Experimental alternative GUI versions
+- `alternativ/` → Experimental alternative GUI versions for Linux
 - Root contains quick launchers & legacy scripts.
 
 ---
@@ -42,19 +43,13 @@ You can filter timelines by name and either use presets or define custom encoder
     pip install tk
     ```
 
-3. Go to `release/win/nightly/` and use e.g.:
-    - `search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.py` (English)
-    - Optional: Use matching `Encodingmanager_EN.py` for compact GUI
+3. Go to `release/win/` and use e.g.:
+    - `nightly/search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.py` (English) for more feature GUI
+    - Optional: Use `Encodingmanager_EN.py` for stable GUI
 
 4. Run the script **inside DaVinci Resolve** via Console:
     - Menu: `Workspace > Console > Python 3`
-    - Paste the content of the script and press Enter
-
-Or from command line (if Resolve scripting is set up globally):
-
-```bash
-python search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.py
-```
+    - Paste the content of the .py script and press Enter
 
 ---
 
@@ -103,15 +98,6 @@ python search_in_timelines_and_encode_GUI_alternativ_d.py
 
 ---
 
-## 📷 Screenshots
-
-### GUI (Windows, EN)
-![Screenshot](Screenshots/search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.PNG)
-
-### GUI (Linux)
-![Linux GUI](Screenshots/search_in_timelines_and_encode_GUI_Screenshot2.png)
-
----
 
 ## 🧩 Dependencies
 
@@ -143,6 +129,15 @@ MIT License
 ## 📺 Demo
 
 [![YouTube Demo](http://img.youtube.com/vi/iSUb798p8DM/0.jpg)](http://www.youtube.com/watch?v=iSUb798p8DM)
+
+---
+## 📷 Screenshots
+
+### GUI (Windows, EN)
+![Screenshot](Screenshots/search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.PNG)
+
+### GUI (Linux)
+![Linux GUI](Screenshots/search_in_timelines_and_encode_GUI_Screenshot2.png)
 
 ---
 
