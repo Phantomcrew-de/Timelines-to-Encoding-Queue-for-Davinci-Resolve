@@ -139,6 +139,9 @@ MIT License
 ### GUI (Linux)
 ![Linux GUI](Screenshots/search_in_timelines_and_encode_GUI_Screenshot2.png)
 
+### DaVinci Resolve
+![Workspace > Console](Screenshots/Encodingmanager_py3_win_release_EN_2025_05_03.PNG)
+
 ---
 
 For issues or suggestions, open a GitHub issue or visit [phantomcrew.de](https://phantomcrew.de)
