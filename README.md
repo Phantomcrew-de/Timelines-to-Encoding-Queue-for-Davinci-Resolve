@@ -1,76 +1,144 @@
-## Timelines to Encoding Queue for Davinci Resolve
+# Timelines to Encoding Queue for DaVinci Resolve
 
-This script automaticly adds your timelines of your projects to the encoding queue. Search in names of timelines for choosing which timelines you need to encode.
+This tool allows you to automatically add multiple timelines from your DaVinci Resolve projects to the render queue.
+You can filter timelines by name and either use presets or custom encoding settings.
 
-The main script (search_in_timelines_and_encode.py) runs only in the davinci resolve studio version.
-Installation
-For Linux (Ubuntu/Zorin, Davinci Resolve Studio):
+> 🖥 Supports **DaVinci Resolve Studio only**
+> 
+> ✅ GUI for both **Windows (Python 3)** and **Linux (Python 2.7)** included
 
-You need to install python 2.7.18 on your system. Alternatively, install anaconda and create a conda environment with python 2.7 ```chmod +x run_search_and_encode.sh```
-Run
-#### For Linux (Ubuntu/Zorin, Davinci Resolve Studio):
+---
 
-Run davinci resolve and open your project.
-Go to the Deliver page and change the encoding settings to your custom output format
-After changing Video and Audio settings you go to File and change Filename use to Timeline name
-Open your terminal and run the script with: ```python2 ./search_in_timelines_and_encode_GUI.py``` or ```./run_search_and_encode.sh```
-You can run the script several times with multiple project files. You need to activate Show all projects at the three dots in the top right corner of your Encoding Queue
+## 🔧 Features
 
-#### For Linux (Ubuntu/Zorin, Davinci Resolve non-Studio):
+- Filter timelines by name (e.g., `_v01`, `Final`, `cut1`)
+- Add multiple timelines to the render queue with one click
+- GUI for selecting projects, render presets, and output settings
+- Custom resolution, bitrate, codec & format possible
+- Logging and status per timeline
+- Saves previous settings (presets)
 
-Open search_in_timelines_and_encode_non_studio.py file with editor.
-Modify the string of the variable searchintimelinenamesfor = "_v05" to a string you want to search for.
-Copy the text and past it inside Davinci Resolve > Workspace > Console > Python 3
-Press enter
+---
 
-#### Example:
-[![Watch the video](https://img.youtube.com/vi/iSUb798p8DM/default.jpg)](https://youtu.be/iSUb798p8DM) 
+## 📁 Folder Structure
 
-### 🐍 Python Setup
+- `release/`
+  - `linux/` → Python 2 scripts for Linux (GUI & shell start scripts for terminal)
+  - `win/` → Python 3 scripts for Windows (stable versions with GUI for DaVinci Resolve console)
+  - `win/nightly/` → Python 3 scripts for Windows (nightly versions with GUI for DaVinci Resolve console)
+- `Screenshots/` → GUI screenshots for documentation
+- `alternativ/` → Experimental alternative GUI versions
+- Root contains quick launchers & legacy scripts.
 
-This script requires Python. Depending on your DaVinci Resolve version:
+---
 
-- **DaVinci Resolve Studio** supports **Python 2**.
-- **DaVinci Resolve (Free)** supports **Python 3**.
+## 💻 Installation
 
-You only need one of them installed on your system. If you're unsure, install **Python 3**.
+### Windows (Python 3.x, DaVinci Resolve Studio)
 
-#### 📅 Install Python
-##### Windows
+1. **Install Python 3.x**: https://www.python.org/downloads/
+2. Install `tkinter` via:
 
-    Download the appropriate version:
+    ```bash
+    pip install tk
+    ```
 
-        Python 2: https://www.python.org/downloads/release/python-2718/
+3. Go to `release/win/nightly/` and use e.g.:
+    - `search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.py` (English)
+    - Optional: Use matching `Encodingmanager_EN.py` for compact and stable GUI
 
-        Python 3: https://www.python.org/downloads/windows/
+4. Run the script **inside DaVinci Resolve** via Console:
+    - Menu: `Workspace > Console > Python 3`
+    - Paste the content of the script and press Enter
 
-        Make sure to check the box "Add Python to PATH" during installation.
+---
 
-##### Linux (Ubuntu/Debian)
+### Linux (Python 2.7, DaVinci Resolve Studio)
 
-    Python 2:
+1. Install dependencies:
 
-```sudo apt update```
-```sudo apt install python2```
+    ```bash
+    sudo apt install python2 python-tk
+    ```
 
-Python 3:
-    ```sudo apt update```
-    ```sudo apt install python3```
+2. Navigate to `release/linux/` and run:
 
-🏠 Install Tkinter GUI (required for this script)
+```bash
+./run_encoding_manager_a.sh
+```
 
-##### macOS
-Python 3:
-```brew install python-tk```
+This calls `search_in_timelines_and_encode_GUI.py`, the full GUI version.
+Alternatively, run manually:
 
-##### Windows
-kinter is typically included by default. If you experience issues:
-For Python 2: Reinstall from python.org
-For Python 3: Use the official installer from python.org, ensuring the tcl/tk and IDLE feature is selected.
+```bash
+python2 search_in_timelines_and_encode_GUI_alternativ_d.py
+```
 
-##### Linux (Ubuntu/Debian)
-Python 2:
-```sudo apt install python-tk```
+If you use Anaconda:
 
-Python 3:
-```sudo apt install python3-tk```
+```bash
+conda create -n drencode python=2.7
+conda activate drencode
+python search_in_timelines_and_encode_GUI_alternativ_d.py
+```
+
+---
+
+## ▶ How to Use
+
+1. Open **DaVinci Resolve Studio** and load your project.
+2. Go to the **Deliver** page.
+3. Set render settings (format, codec, etc.)
+4. Set filename option to **Timeline name**
+5. Run the script (GUI appears)
+6. Choose project, output folder, render preset or custom config
+7. Enter search term (e.g., `_v05`) → Click **Filter**
+8. Select timelines → Click **Add to Queue**
+9. Click **Start Rendering**
+
+---
+
+## 🧩 Dependencies
+
+| Platform | Version | Required | Notes |
+|---------|---------|----------|-------|
+| Python 3 | Windows | ✅ | Required for Windows GUIs |
+| Python 2.7 | Linux | ✅ | Needed for older DaVinci scripting |
+| tkinter | All | ✅ | Install with Python or OS package manager |
+
+---
+
+## 📁 Project Variants
+
+| Script | Platform | Language | UI | Path |
+|--------|----------|----------|----|------|
+| `search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.py` | Windows | EN | ✅ | `release/win/nightly/` |
+| `Encodingmanager_EN.py` | Windows | EN | ✅ | `release/win/nightly/` |
+| `search_in_timelines_and_encode_GUI_alternativ_d.py` | Linux | DE | ✅ | `release/linux/` |
+| `search_in_timelines_and_encode_non_studio.py` | All | EN | ❌ | root (legacy) |
+
+---
+
+## 📝 License
+
+MIT License
+
+---
+
+## 📺 Demo
+
+[![YouTube Demo](http://img.youtube.com/vi/iSUb798p8DM/0.jpg)](http://www.youtube.com/watch?v=iSUb798p8DM)
+
+---
+
+## 📷 Screenshots
+
+### GUI (Windows, EN)
+![Screenshot](Screenshots/search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.PNG)
+
+### GUI (Linux)
+![Linux GUI](Screenshots/search_in_timelines_and_encode_GUI_d_screenshot.png)
+
+---
+
+For issues or suggestions, open a GitHub issue or visit [phantomcrew.de](https://phantomcrew.de)
