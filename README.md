@@ -120,12 +120,6 @@ python search_in_timelines_and_encode_GUI_alternativ_d.py
 
 ---
 
-## 📝 License
-
-MIT License
-
----
-
 ## 📺 Demo
 
 [![YouTube Demo](http://img.youtube.com/vi/iSUb798p8DM/0.jpg)](http://www.youtube.com/watch?v=iSUb798p8DM)
@@ -141,6 +135,12 @@ MIT License
 
 ### DaVinci Resolve
 ![Workspace > Console](Screenshots/Encodingmanager_py3_win_release_EN_2025_05_03.PNG)
+
+---
+
+## 📝 License
+
+MIT License
 
 ---
 
