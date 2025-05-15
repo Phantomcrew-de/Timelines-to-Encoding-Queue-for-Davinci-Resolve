@@ -1,4 +1,4 @@
-# Timelines to Encoding Queue – Encoding / Render Manager for DaVinci Resolve
+# Timelines to Encoding Queue – Render Manager for DaVinci Resolve
 
 This tool acts as a Render Manager and Timeline Encoder for DaVinci Resolve, allowing you to automatically add multiple timelines to the encoding queue.
 You can filter timelines by name and either use presets or define custom encoder settings like bitrate, format, or resolution.
