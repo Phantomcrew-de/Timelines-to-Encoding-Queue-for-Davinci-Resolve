@@ -137,7 +137,7 @@ MIT License
 ![Screenshot](Screenshots/search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.PNG)
 
 ### GUI (Linux)
-![Linux GUI](Screenshots/search_in_timelines_and_encode_GUI_Screenshot2.png)
+![Linux GUI](Screenshots/search_in_timelines_and_encode_GUI_d_screenshot.png)
 
 ### DaVinci Resolve
 ![Workspace > Console](Screenshots/Encodingmanager_py3_win_release_EN_2025_05_03.PNG)
