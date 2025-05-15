@@ -127,14 +127,24 @@ python search_in_timelines_and_encode_GUI_alternativ_d.py
 ---
 ## 📷 Screenshots
 
-### GUI (Windows, EN)
-![Screenshot](Screenshots/search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.PNG)
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <img src="Screenshots/search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.PNG" width="250px"><br>
+      <strong>GUI (Windows, EN)</strong>
+    </td>
+    <td align="center" width="33%">
+      <img src="Screenshots/search_in_timelines_and_encode_GUI_d_screenshot.png" width="250px"><br>
+      <strong>GUI (Linux)</strong>
+    </td>
+    <td align="center" width="33%">
+      <img src="Screenshots/Encodingmanager_py3_win_release_EN_2025_05_03.PNG" width="250px"><br>
+      <strong>DaVinci Resolve Console</strong>
+    </td>
+  </tr>
+</table>
 
-### GUI (Linux)
-![Linux GUI](Screenshots/search_in_timelines_and_encode_GUI_d_screenshot.png)
 
-### DaVinci Resolve
-![Workspace > Console](Screenshots/Encodingmanager_py3_win_release_EN_2025_05_03.PNG)
 
 ---
 
