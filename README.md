@@ -88,7 +88,7 @@ You can filter timelines by name and either use presets or define custom encoder
    ```bash
    ./run_encoding_manager_mac_b.sh
    ```
-
+---
 ### Linux (Python 2.7, DaVinci Resolve Studio)
 
 1. Install dependencies:
