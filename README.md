@@ -155,4 +155,8 @@ You are free to use, modify, and distribute it — as long as you share your cha
 
 ---
 
+## 🤝 Author
+
+Made with ❤️ by Julius – [phantomcrew.de](https://phantomcrew.de/)
+
 For issues or suggestions, open a GitHub issue or visit [phantomcrew.de](https://phantomcrew.de)
