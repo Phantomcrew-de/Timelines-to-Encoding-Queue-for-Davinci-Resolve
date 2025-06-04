@@ -174,11 +174,11 @@ python search_in_timelines_and_encode_GUI_alternativ_d.py
     </td>
     <td align="center" width="25%">
       <img src="Screenshots/search_in_timelines_and_encode_GUI_mac_a.png" width="250px"><br>
-      <strong>Encoder GUI (macOS)</strong>
+      <strong>Encoder GUI (macOS, DE)</strong>
     </td>
     <td align="center" width="25%">
       <img src="Screenshots/search_in_timelines_and_encode_GUI_d_screenshot.png" width="250px"><br>
-      <strong>Encoder GUI (Linux)</strong>
+      <strong>Encoder GUI (Linux, DE)</strong>
     </td>
     <td align="center" width="25%">
       <img src="Screenshots/Encodingmanager_py3_win_release_EN_2025_05_03.PNG" width="250px"><br>
