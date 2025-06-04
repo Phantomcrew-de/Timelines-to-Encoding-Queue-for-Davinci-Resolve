@@ -3,9 +3,9 @@
 This tool acts as a Timeline Render Manager for DaVinci Resolve, allowing you to automatically add multiple timelines to the encoding queue.
 You can filter timelines by name and either use presets or define custom encoder settings like bitrate, format, or resolution.
 
-> 🖥 Supports **DaVinci Resolve Studio only**
+> 🖥 Supports **DaVinci Resolve Studio**
 > 
-> ✅ GUI for both **Windows, Mac (Python 3)** and **Linux (Python 2.7)** included
+> ✅ GUI for both **Windows, macOS (Python 3)** and **Linux (Python 2.7)** included
 
 ---
 
@@ -151,8 +151,10 @@ python search_in_timelines_and_encode_GUI_alternativ_d.py
 |--------|----------|----------|----|------|
 | `search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.py` | Windows | EN | ✅ | `release/win/nightly/` |
 | `Encodingmanager_EN.py` | Windows | EN | ✅ | `release/win/nightly/` |
+| `search_in_timelines_and_encode_GUI_mac_a.py` | macOS | DE | ✅ | `release/mac/` |
+| `search_in_timelines_and_encode_GUI_mac_b.py` | macOS | DE | ✅ | `release/mac/` |
 | `search_in_timelines_and_encode_GUI_alternativ_d.py` | Linux | DE | ✅ | `release/linux/` |
-| `search_in_timelines_and_encode_non_studio.py` | All | EN | ❌ | root (legacy) |
+| `search_in_timelines_and_encode_non_studio.py` | Linux | EN | ❌ | root (legacy) |
 
 ---
 
@@ -165,15 +167,19 @@ python search_in_timelines_and_encode_GUI_alternativ_d.py
 
 <table>
   <tr>
-    <td align="center" width="33%">
+    <td align="center" width="25%">
       <img src="Screenshots/search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.PNG" width="250px"><br>
       <strong>GUI (Windows, EN)</strong>
     </td>
-    <td align="center" width="33%">
+    <td align="center" width="25%">
+      <img src="Screenshots/search_in_timelines_and_encode_GUI_mac_a.png" width="250px"><br>
+      <strong>GUI (macOS)</strong>
+    </td>
+    <td align="center" width="25%">
       <img src="Screenshots/search_in_timelines_and_encode_GUI_d_screenshot.png" width="250px"><br>
       <strong>GUI (Linux)</strong>
     </td>
-    <td align="center" width="33%">
+    <td align="center" width="25%">
       <img src="Screenshots/Encodingmanager_py3_win_release_EN_2025_05_03.PNG" width="250px"><br>
       <strong>DaVinci Resolve Console</strong>
     </td>
