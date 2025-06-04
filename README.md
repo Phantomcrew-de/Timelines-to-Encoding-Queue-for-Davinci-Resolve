@@ -139,8 +139,8 @@ python search_in_timelines_and_encode_GUI_alternativ_d.py
 
 | Platform | Version | Required | Notes |
 |---------|---------|----------|-------|
-| Python 3 | Windows | ✅ | Required for Windows GUIs |
-| Python 3 | macOS | ✅ | Required for Windows GUIs |
+| Python 3.11.9 | Windows | ✅ | Required for Windows GUIs |
+| Python 3.11.0 | macOS | ✅ | Required for Windows GUIs |
 | Python 2.7 | Linux | ✅ | Needed for older DaVinci scripting |
 | tkinter | All | ✅ | Install with Python or OS package manager |
 
