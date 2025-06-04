@@ -24,7 +24,7 @@ You can filter timelines by name and either use presets or define custom encoder
 
 - `release/`
   - `linux/` → Python 2 scripts for Linux (GUI & shell start scripts)
-  - `mac/` → Python 3 scripts for Mac OS X (GUI & shell start scripts)
+  - `mac/` → Python 3 scripts for macOS (GUI & shell start scripts)
   - `win/` → Python 3 scripts for Windows (stable versions with GUI)
   - `win/nightly/` → Python 3 scripts for Windows (nightly versions with GUI)
 - `Screenshots/` → GUI screenshots for documentation
