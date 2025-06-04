@@ -35,7 +35,7 @@ You can filter timelines by name and either use presets or define custom encoder
 
 ## 💻 Installation
 
-### Windows (Python 3.x, DaVinci Resolve Studio)
+### Windows (Python 3.x, DaVinci Resolve)
 
 1. **Install Python 3.x**: https://www.python.org/downloads/
 2. Install `tkinter` via:
@@ -53,6 +53,41 @@ You can filter timelines by name and either use presets or define custom encoder
     - Paste the content of the .py script and press Enter
 
 ---
+
+### Mac OS X (Python 3.x, DaVinci Resolve Studio)
+
+
+* `run_encoding_manager_mac_a.sh` – Launcher for version A
+* `search_in_timelines_and_encode_GUI_mac_a.py` – Main Python GUI for version A
+* `run_encoding_manager_mac_b.sh` – Launcher for version B
+* `search_in_timelines_and_encode_GUI_mac_b.py` – Main Python GUI for version B
+
+1. **Ensure All Files Are in the Same Folder**
+   Each `.sh` file must be in the same folder as its corresponding `.py` file:
+
+   * `run_encoding_manager_mac_a.sh` ⇨ `search_in_timelines_and_encode_GUI_mac_a.py`
+   * `run_encoding_manager_mac_b.sh` ⇨ `search_in_timelines_and_encode_GUI_mac_b.py`
+
+2. **Make the Shell Scripts Executable**
+   Open a Terminal in the folder where the files are located and run:
+
+   ```bash
+   chmod +x run_encoding_manager_mac_a.sh
+   chmod +x run_encoding_manager_mac_b.sh
+   ```
+
+3. **Run the Application**
+   In the same Terminal window, launch one of the GUIs by running:
+
+   ```bash
+   ./run_encoding_manager_mac_a.sh
+   ```
+
+   or
+
+   ```bash
+   ./run_encoding_manager_mac_b.sh
+   ```
 
 ### Linux (Python 2.7, DaVinci Resolve Studio)
 
