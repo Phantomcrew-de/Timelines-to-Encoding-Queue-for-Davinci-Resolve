@@ -140,6 +140,7 @@ python search_in_timelines_and_encode_GUI_alternativ_d.py
 | Platform | Version | Required | Notes |
 |---------|---------|----------|-------|
 | Python 3 | Windows | ✅ | Required for Windows GUIs |
+| Python 3 | macOS | ✅ | Required for Windows GUIs |
 | Python 2.7 | Linux | ✅ | Needed for older DaVinci scripting |
 | tkinter | All | ✅ | Install with Python or OS package manager |
 
@@ -169,15 +170,15 @@ python search_in_timelines_and_encode_GUI_alternativ_d.py
   <tr>
     <td align="center" width="25%">
       <img src="Screenshots/search_in_timelines_and_encode_GUI_py3_win_nightly_02b_EN.PNG" width="250px"><br>
-      <strong>GUI (Windows, EN)</strong>
+      <strong>Encoder GUI (Windows, EN)</strong>
     </td>
     <td align="center" width="25%">
       <img src="Screenshots/search_in_timelines_and_encode_GUI_mac_a.png" width="250px"><br>
-      <strong>GUI (macOS)</strong>
+      <strong>Encoder GUI (macOS)</strong>
     </td>
     <td align="center" width="25%">
       <img src="Screenshots/search_in_timelines_and_encode_GUI_d_screenshot.png" width="250px"><br>
-      <strong>GUI (Linux)</strong>
+      <strong>Encoder GUI (Linux)</strong>
     </td>
     <td align="center" width="25%">
       <img src="Screenshots/Encodingmanager_py3_win_release_EN_2025_05_03.PNG" width="250px"><br>
