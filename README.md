@@ -5,7 +5,7 @@ You can filter timelines by name and either use presets or define custom encoder
 
 > 🖥 Supports **DaVinci Resolve Studio only**
 > 
-> ✅ GUI for both **Windows (Python 3)** and **Linux (Python 2.7)** included
+> ✅ GUI for both **Windows, Mac (Python 3)** and **Linux (Python 2.7)** included
 
 ---
 
@@ -148,9 +148,10 @@ python search_in_timelines_and_encode_GUI_alternativ_d.py
 
 ---
 
-## 📝 License
+## 📄 License
 
-MIT License
+This project is licensed under the GNU General Public License v3.0 (GPL-3.0).  
+You are free to use, modify, and distribute it — as long as you share your changes under the same license.
 
 ---
 
