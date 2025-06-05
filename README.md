@@ -190,10 +190,10 @@ python search_in_timelines_and_encode_GUI_alternativ_d.py
 ---
 
 ## 📄 License
-
+Licensed under the GNU General Public License v3.0 (GPL-3.0) — free to use, modify, and distribute under the same terms.
 This is an unofficial project and has no affiliation with Blackmagic Design.
 “DaVinci Resolve” is a registered trademark of Blackmagic Design Pty Ltd.
-Licensed under the GNU General Public License v3.0 (GPL-3.0) — free to use, modify, and distribute under the same terms.
+
 
 ---
 
