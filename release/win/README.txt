@@ -2,7 +2,7 @@
 INSTALLING ENCODINGMANAGER MANUALLY IN DAVINCI RESOLVE
 ==============================
 
-Copy *.py files to "/Users/$USER/Library/Application Support/Blackmagic Design/DaVinci Resolve/Fusion/Scripts/Edit" 
+Copy *.py files to "C:\Users\%USERNAME%\AppData\Roaming\Blackmagic Design\DaVinci Resolve\Support\Fusion\Scripts\Edit" 
 
 If the script does not appear in the "Workspace > Scripts" menu,
 you can run it manually using the DaVinci Resolve Console.
