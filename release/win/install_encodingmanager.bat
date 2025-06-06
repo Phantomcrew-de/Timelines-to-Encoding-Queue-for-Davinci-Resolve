@@ -2,22 +2,22 @@
 chcp 65001 >nul
 setlocal enabledelayedexpansion
 
-rem Sprachoptionen anzeigen
-echo Wähle die Sprache der Datei, die du installieren möchtest:
+:: Show language options
+echo Select the language of the file you want to install:
 echo.
-echo 1. Deutsch (DE)
-echo 2. Englisch (EN)
-echo 3. Italienisch (IT)
-echo 4. Spanisch (ES)
-echo 5. Französisch (FR)
-echo 6. Tschechisch (CS)
-echo 7. Polnisch (PL)
-echo 8. Niederländisch (NL)
+echo 1. German (DE)
+echo 2. English (EN)
+echo 3. Italian (IT)
+echo 4. Spanish (ES)
+echo 5. French (FR)
+echo 6. Czech (CS)
+echo 7. Polish (PL)
+echo 8. Dutch (NL)
 echo.
 
-set /p langChoice=Bitte gib die Zahl ein (1–8):
+set /p langChoice=Please enter the number (1–8):
 
-rem Sprachkürzel entsprechend der Auswahl setzen
+:: Set language code based on selection
 set "langCode="
 if "%langChoice%"=="1" set langCode=DE
 if "%langChoice%"=="2" set langCode=EN
@@ -29,34 +29,33 @@ if "%langChoice%"=="7" set langCode=PL
 if "%langChoice%"=="8" set langCode=NL
 
 if "%langCode%"=="" (
-    echo Ungültige Auswahl. Skript wird beendet.
+    echo Invalid selection. Script will exit.
     pause
     exit /b
 )
 
-rem Quelldatei festlegen
+:: Define source file
 set "SOURCE_FILE=Encodingmanager_%langCode%.py"
 
-rem Prüfen, ob die Quelldatei existiert
+:: Check if the source file exists
 if not exist "%SOURCE_FILE%" (
-    echo Fehler: Die Datei "%SOURCE_FILE%" wurde im aktuellen Ordner nicht gefunden.
+    echo Error: The file "%SOURCE_FILE%" was not found in the current folder.
     pause
     exit /b
 )
 
-rem Zielverzeichnis definieren
+:: Define target directory
 set "TARGET_DIR=C:\Users\%USERNAME%\AppData\Roaming\Blackmagic Design\DaVinci Resolve\Support\Fusion\Scripts\Edit"
 
-rem Zielverzeichnis erstellen, falls es nicht existiert
+:: Create target directory if it doesn't exist
 if not exist "%TARGET_DIR%" (
     mkdir "%TARGET_DIR%"
 )
 
-rem Datei kopieren
+:: Copy the file
 copy /Y "%SOURCE_FILE%" "%TARGET_DIR%"
 
 echo.
-echo ✓ Datei "%SOURCE_FILE%" wurde erfolgreich nach:
+echo ✓ File "%SOURCE_FILE%" has been successfully copied to:
 echo   %TARGET_DIR%
-echo kopiert.
 pause
