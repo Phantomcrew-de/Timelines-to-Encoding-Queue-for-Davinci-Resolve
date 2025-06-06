@@ -40,13 +40,15 @@ This directory contains two GUI-based render manager applications for DaVinci Re
 
    This will start the corresponding Python-based GUI interface using the DaVinci Resolve scripting API.
 
-   Experimental: Try to Copy
+### 🧪 Experimental
+   
+   Try to Copy
    ```bash
-   ./search_in_timelines_and_encode_GUI_mac_a.py 
+   search_in_timelines_and_encode_GUI_mac_a.py 
    ```
    or
    ```bash
-   ./search_in_timelines_and_encode_GUI_mac_b.py
+   search_in_timelines_and_encode_GUI_mac_b.py
    ```
    to
    ```bash
