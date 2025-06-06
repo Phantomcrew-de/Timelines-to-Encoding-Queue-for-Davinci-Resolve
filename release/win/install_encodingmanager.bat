@@ -45,7 +45,7 @@ if not exist "%SOURCE_FILE%" (
 )
 
 rem Zielverzeichnis definieren
-set "TARGET_DIR=C:\Users\%username%\AppData\Roaming\Blackmagic Design\DaVinci Resolve\Support\Scripts\Deliver"
+set "TARGET_DIR=C:\Users\%USERNAME%\AppData\Roaming\Blackmagic Design\DaVinci Resolve\Support\Fusion\Scripts\Edit"
 
 rem Zielverzeichnis erstellen, falls es nicht existiert
 if not exist "%TARGET_DIR%" (
