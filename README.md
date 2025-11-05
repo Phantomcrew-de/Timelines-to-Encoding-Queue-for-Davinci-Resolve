@@ -202,3 +202,5 @@ This is an unofficial project and has no affiliation with Blackmagic Design.
 Made with ❤️ by Julius – [phantomcrew.de](https://phantomcrew.de/)
 
 For issues or suggestions, open a GitHub issue or visit [phantomcrew.de](https://phantomcrew.de)
+
+<br><a href="https://www.buymeacoffee.com/phantomcrew" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
